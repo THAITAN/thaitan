@@ -157,8 +157,33 @@ class PostsController extends Controller
 
       $query = $request->get('q');
       if($query){
+        //検索ワードで絞った記事一覧
         $posts = $this->posts->where('title', 'LIKE', "%{$query}%")->orderBy("created_at", "desc")->paginate(3);
-	    }else{
+        //カテゴリと地域で絞った記事一覧
+      }elseif($request->has("category") && $request->has("region")){
+        if($request->get("category") < 10){
+          //子カテゴリと地域
+          $posts = $this->posts->where("child_cat_id", $request->get("category"))->where("region_id", $request->get("region"))->paginate(3);
+        }else{
+          //カテゴリと地域
+          $category_id = $request->get("category") - 10;
+          $posts = $this->posts->where("cat_id", $category_id)->where("region_id", $request->get("region"))->paginate(3);
+        }
+        //カテゴリのみの絞り込み
+	    }elseif($request->has("category")){
+        if($request->get("category") < 10){
+          //子カテゴリのみ
+          $posts = $this->posts->where("child_cat_id", $request->get("category"))->paginate(3);
+        }else{
+          //カテゴリのみ
+          $category_id = $request->get("category") - 10;
+          $posts = $this->posts->where("cat_id", $category_id)->paginate(3);
+        }
+      }elseif($request->has("region")){
+          //地域のみ
+          $posts = $this->posts->where("region_id", $request->get("region"))->paginate(3);
+      }else{
+        //デフォルトの記事一覧
 		    $posts = $this->posts->orderBy("created_at", "desc")->paginate(3);
 	    }
 
