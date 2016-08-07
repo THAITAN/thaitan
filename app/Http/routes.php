@@ -20,9 +20,13 @@ Route::get('/', function () {
 //thai_intern/~のURLの形で呼び出すリソースコントローラー以外のルートはリソースコントローラーのルートより先に書かないかんよ。
 Route::get('thai_intern/post', 'PostsController@showPosts');
 Route::get('thai_intern/apply_form/{id}', 'PostsController@applyForm');
+Route::get('thai_intern/contact_form', 'PostsController@showContactForm');
+Route::get('thai_intern/about', 'PostsController@showAbout');
+Route::get('thai_intern/sample', 'PostsController@showSample');
 Route::resource('thai_intern', 'PostsController');
-Route::get('thai_intern/category/{id}', 'PostsController@showCategory');
-Route::get('thai_intern/child_category/{id}', 'PostsController@showChildCategory');
-Route::get('thai_intern/region/{id}', 'PostsController@showRegion');
+//Route::get('thai_intern/category/{id}', 'PostsController@showCategory');
+//Route::get('thai_intern/child_category/{id}', 'PostsController@showChildCategory');
+//Route::get('thai_intern/region/{id}', 'PostsController@showRegion');
 
 Route::post('thai_intern/send_application', 'MailController@sendApplication');
+Route::post('thai_intern/send_contactform', 'ContactsController@sendContactForm');

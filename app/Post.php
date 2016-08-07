@@ -28,6 +28,10 @@ class Post extends Model
     return $this->belongsTo('App\Category', 'cat_id');
   }
 
+  public function child_categories(){
+    return $this->belongsTo('App\ChildCategory', 'child_cat_id');
+  }
+
   public function regions(){
     return $this->belongsTo('App\Region', 'region_id');
   }

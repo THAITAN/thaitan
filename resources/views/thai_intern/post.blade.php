@@ -57,7 +57,7 @@
             <img src="/css/images/{{$post->mainimages->image}}">
           </div>
           @if($post->categories->id == 1 || $post->categories->id == 2)
-            <p class="category">{{$post->categories->childcategories->name}}</p>
+            <p class="category">{{$post->child_categories->name}}</p>
           @else
             <p class="category">{{$post->categories->name}}</p>
           @endif
@@ -70,7 +70,7 @@
       @endforeach
     </div>
     <div class="pagination-part">
-      {{ $posts->appends(Request::only('q'))->links() }}
+      {{ $posts->appends(Request::only(['q', 'category', 'region']))->links() }}
     </div>
   </div>
 </div>

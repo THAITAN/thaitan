@@ -44,14 +44,14 @@ class PostsController extends Controller
 
     public function store(StoreRequest $request)
     {
-      if(0 < $request->get("find_id") && $request->get("find_id") < 5){
+      if(0 < $request->get("find_id") && $request->get("find_id") < 4){
         $category_id = 1;
         $child_cat_id = $request->get("find_id");
-      }elseif(4 < $request->get("find_id") && $request->get("find_id") < 8){
+      }elseif(3 < $request->get("find_id") && $request->get("find_id") < 6){
         $category_id = 2;
         $child_cat_id = $request->get("find_id");
       }elseif($request->get("find_id")){
-        $category_id = $request->get("find_id") - 5;
+        $category_id = $request->get("find_id") - 3;
         $child_cat_id = null;
       }
 
@@ -119,6 +119,21 @@ class PostsController extends Controller
       return view("thai_intern.apply_form")->with("post", $post);
     }
 
+    public function showAbout()
+    {
+      return view("thai_intern.about_us");
+    }
+
+    public function showSample()
+    {
+      return view("thai_intern.sample");
+    }
+
+    public function showContactForm(){
+      return view("thai_intern.contact");
+    }
+
+    /*
     public function showCategory($id)
     {
       $all_posts = Post::all();
@@ -128,7 +143,9 @@ class PostsController extends Controller
       $regions = Region::all();
       return view("thai_intern.post")->with("posts", $posts)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
     }
+    */
 
+    /*
     public function showChildCategory($id)
     {
       $all_posts = Post::all();
@@ -138,8 +155,9 @@ class PostsController extends Controller
       $regions = Region::all();
       return view("thai_intern.post")->with("posts", $posts)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
     }
+    */
 
-    public function showRegion($id)
+    /*public function showRegion($id)
     {
       $all_posts = Post::all();
       $posts = $this->posts->where("region_id", $id)->orderBy("created_at", "desc")->paginate(3);
@@ -148,6 +166,7 @@ class PostsController extends Controller
       $regions = Region::all();
       return view("thai_intern.post")->with("posts", $posts)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
     }
+    */
 
     public function showPosts(Request $request){
       $all_posts = Post::all();
@@ -161,7 +180,306 @@ class PostsController extends Controller
         $posts = $this->posts->where('title', 'LIKE', "%{$query}%")->orderBy("created_at", "desc")->paginate(3);
         //カテゴリと地域で絞った記事一覧
       }elseif($request->has("category") && $request->has("region")){
-        if($request->get("category") < 10){
+        switch($request->get("category")){
+          case "Web Engineer":
+            $category_id = 1;
+            break;
+          case "Mobile Engineer":
+            $category_id = 2;
+            break;
+          case "Infra Engineer":
+            $category_id = 3;
+            break;
+          case "UI/UX Designer":
+            $category_id = 4;
+            break;
+          case "Graphic Designer":
+            $category_id = 5;
+            break;
+          default:
+            $category_id = "no";
+        }
+        switch($request->get("region")){
+          case "バンコク":
+            $region_id = 1;
+            break;
+          case "ノンタブリー":
+            $region_id = 2;
+            break;
+          case "ナコーンラーチャシーマー":
+            $region_id = 3;
+            break;
+          case "チェンマイ":
+            $region_id = 4;
+            break;
+          case "ハジャイ":
+            $region_id = 5;
+            break;
+          case "テーサバーンナコーン・ウドーンターニー":
+            $region_id = 6;
+            break;
+          case "パーククレット":
+            $region_id = 7;
+            break;
+          case "コーンケン":
+            $region_id = 8;
+            break;
+          case "チャオプラヤ・スラサク":
+            $region_id = 9;
+            break;
+          case "ウボンラーチャターニー":
+            $region_id = 10;
+            break;
+          case "ナコーンシータンマラート":
+            $region_id = 11;
+            break;
+          case "ナコーンサワン":
+            $region_id = 12;
+            break;
+          case "ナコーンパトム":
+            $region_id = 13;
+            break;
+          case "ピサヌローク":
+            $region_id = 14;
+            break;
+          case "パッターヤ":
+            $region_id = 15;
+            break;
+          case "ソンクラー":
+            $region_id = 16;
+            break;
+          case "スラートターニー":
+            $region_id = 17;
+            break;
+          case "ランシット":
+            $region_id = 18;
+            break;
+          case "ヤラー":
+            $region_id = 19;
+            break;
+          case "プーケット":
+            $region_id = 20;
+            break;
+          case "サムットプラーカーン":
+            $region_id = 21;
+            break;
+          case "ラムパーン":
+            $region_id = 22;
+            break;
+          case "レムチャバン":
+            $region_id = 23;
+            break;
+          case "チエンラーイ":
+            $region_id = 24;
+            break;
+          case "トラン":
+            $region_id = 25;
+            break;
+          case "アユタヤ":
+            $region_id = 26;
+            break;
+          case "サムイ島":
+            $region_id = 27;
+            break;
+          case "サムットサーコーン":
+            $region_id = 28;
+            break;
+          case "ラヨーン":
+            $region_id = 29;
+            break;
+          case "メーソート":
+            $region_id = 30;
+            break;
+          case "オム・ノイ":
+            $region_id = 31;
+            break;
+          case "サコンナコーン":
+            $region_id = 32;
+            break;
+        }
+        if($category_id == "no"){
+          switch($request->get("category")){
+            case "Director":
+              $category_id = 3;
+              break;
+            case "Sells":
+              $category_id = 4;
+              break;
+            case "Marketing":
+              $category_id = 5;
+              break;
+            case "Writer":
+              $category_id = 6;
+              break;
+            case "Restaurant":
+              $category_id = 7;
+              break;
+            case "Tourist":
+              $category_id = 8;
+              break;
+            case "Bookstore":
+              $category_id = 9;
+              break;
+            case "Other":
+              $category_id = 10;
+              break;
+          }
+          $posts = $this->posts->where("cat_id", $category_id)->where("region_id", $region_id)->paginate(3);
+        }else{
+          $posts = $this->posts->where("child_cat_id", $category_id)->where("region_id", $region_id)->paginate(3);
+        }
+      }elseif($request->has("category")){
+        switch($request->get("category")){
+          case "Web Engineer":
+            $category_id = 1;
+            break;
+          case "Mobile Engineer":
+            $category_id = 2;
+            break;
+          case "Infra Engineer":
+            $category_id = 3;
+            break;
+          case "UI/UX Designer":
+            $category_id = 4;
+            break;
+          case "Graphic Designer":
+            $category_id = 5;
+            break;
+          default:
+            $category_id = "no";
+        }
+        if($category_id == "no"){
+          switch($request->get("category")){
+            case "Director":
+              $category_id = 3;
+              break;
+            case "Sells":
+              $category_id = 4;
+              break;
+            case "Marketing":
+              $category_id = 5;
+              break;
+            case "Writer":
+              $category_id = 6;
+              break;
+            case "Restaurant":
+              $category_id = 7;
+              break;
+            case "Tourist":
+              $category_id = 8;
+              break;
+            case "Bookstore":
+              $category_id = 9;
+              break;
+            case "Other":
+              $category_id = 10;
+              break;
+          }
+          $posts = $this->posts->where("cat_id", $category_id)->paginate(3);
+        }else{
+          $posts = $this->posts->where("child_cat_id", $category_id)->paginate(3);
+        }
+      }elseif($request->has("region")){
+        switch($request->get("region")){
+          case "バンコク":
+            $region_id = 1;
+            break;
+          case "ノンタブリー":
+            $region_id = 2;
+            break;
+          case "ナコーンラーチャシーマー":
+            $region_id = 3;
+            break;
+          case "チェンマイ":
+            $region_id = 4;
+            break;
+          case "ハジャイ":
+            $region_id = 5;
+            break;
+          case "テーサバーンナコーン・ウドーンターニー":
+            $region_id = 6;
+            break;
+          case "パーククレット":
+            $region_id = 7;
+            break;
+          case "コーンケン":
+            $region_id = 8;
+            break;
+          case "チャオプラヤ・スラサク":
+            $region_id = 9;
+            break;
+          case "ウボンラーチャターニー":
+            $region_id = 10;
+            break;
+          case "ナコーンシータンマラート":
+            $region_id = 11;
+            break;
+          case "ナコーンサワン":
+            $region_id = 12;
+            break;
+          case "ナコーンパトム":
+            $region_id = 13;
+            break;
+          case "ピサヌローク":
+            $region_id = 14;
+            break;
+          case "パッターヤ":
+            $region_id = 15;
+            break;
+          case "ソンクラー":
+            $region_id = 16;
+            break;
+          case "スラートターニー":
+            $region_id = 17;
+            break;
+          case "ランシット":
+            $region_id = 18;
+            break;
+          case "ヤラー":
+            $region_id = 19;
+            break;
+          case "プーケット":
+            $region_id = 20;
+            break;
+          case "サムットプラーカーン":
+            $region_id = 21;
+            break;
+          case "ラムパーン":
+            $region_id = 22;
+            break;
+          case "レムチャバン":
+            $region_id = 23;
+            break;
+          case "チエンラーイ":
+            $region_id = 24;
+            break;
+          case "トラン":
+            $region_id = 25;
+            break;
+          case "アユタヤ":
+            $region_id = 26;
+            break;
+          case "サムイ島":
+            $region_id = 27;
+            break;
+          case "サムットサーコーン":
+            $region_id = 28;
+            break;
+          case "ラヨーン":
+            $region_id = 29;
+            break;
+          case "メーソート":
+            $region_id = 30;
+            break;
+          case "オム・ノイ":
+            $region_id = 31;
+            break;
+          case "サコンナコーン":
+            $region_id = 32;
+            break;
+        }
+        $posts = $this->posts->where("region_id", $region_id)->paginate(3);
+        /*if($request->get("category") < 10){
           //子カテゴリと地域
           $posts = $this->posts->where("child_cat_id", $request->get("category"))->where("region_id", $request->get("region"))->paginate(3);
         }else{
@@ -181,7 +499,7 @@ class PostsController extends Controller
         }
       }elseif($request->has("region")){
           //地域のみ
-          $posts = $this->posts->where("region_id", $request->get("region"))->paginate(3);
+          $posts = $this->posts->where("region_id", $request->get("region"))->paginate(3);*/
       }else{
         //デフォルトの記事一覧
 		    $posts = $this->posts->orderBy("created_at", "desc")->paginate(3);

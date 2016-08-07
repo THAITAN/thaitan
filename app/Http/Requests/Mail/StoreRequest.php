@@ -14,20 +14,21 @@ class StoreRequest extends Request
   public function rules()
   {
     return [
-      "title" => "required",
-      "content" => "required",
-      "address" => "required|confirmed",
-      "to_address" => "required",
+      "name" => "required",
+      "phone_number" => "required",
+      "mail_address" => "required|confirmed",
+      "reason" => "required",
     ];
   }
 
   public function messages()
   {
     return [
-      "title.required" => "タイトルを正しく入力してください。",
-      "content.required" => "本文を正しく入力してください。",
-      "address.required" => "アドレスを入力してください。",
-      "address.confirmed" =>"アドレスが間違っています。",
+      "name.required" => "名前を正しく入力してください。",
+      "phone_number.required" => "電話番号を正しく入力してください。",
+      "mail_address.required" => "アドレスを入力してください。",
+      "mail_address.confirmed" =>"アドレスが間違っています。",
+      "reason.required" => "志望動機を入力してください。",
     ];
   }
 }

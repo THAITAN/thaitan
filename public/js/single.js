@@ -79,6 +79,8 @@ $(function() {
     });
 });
 
+////画像の縦横の比率維持
+
 $(document).ready(function(){
     $('.img-container').imgLiquid();
 });
@@ -89,4 +91,35 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('.sub-img-container-2').imgLiquid();
+});
+
+//サイドバークリック時の処理（カテゴリ）
+
+$(function(){
+  $(".sidebar-category").click(function(){
+    if($(".sidebar-category").hasClass('selected-cat')){
+      $(".sidebar-category").removeClass('selected-cat');
+      $(this).addClass('selected-cat');
+    }else{
+      $(this).addClass('selected-cat');
+    }
+    var selected_category = $(this);
+    document.getElementById("category").name = selected_category.data("name");
+    document.getElementById("category").value = selected_category.data("value");
+  });
+});
+
+//サイドバークリック時の処理（地域）
+$(function(){
+  $(".sidebar-region").click(function(){
+    if($(".sidebar-region").hasClass('selected-reg')){
+      $(".sidebar-region").removeClass('selected-reg');
+      $(this).addClass('selected-reg');
+    }else{
+      $(this).addClass('selected-reg');
+    }
+    var selected_region = $(this);
+    document.getElementById("region").name = selected_region.data("name");
+    document.getElementById("region").value = selected_region.data("value");
+  });
 });

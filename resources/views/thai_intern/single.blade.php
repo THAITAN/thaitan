@@ -33,7 +33,7 @@
         <div class="post-content-head">
           <h4 class="company">{{$post->companies->company}}</h4>
           @if($post->categories->id == 1 || $post->categories->id == 2)
-            <p class="category">{{$post->categories->childcategories->name}}</p>
+            <p class="category">{{$post->child_categories->name}}</p>
           @else
             <p class="category">{{$post->categories->name}}</p>
           @endif

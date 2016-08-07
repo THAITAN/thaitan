@@ -15,9 +15,9 @@ $(function(){
     console.log(all_latitude[j]);
   }
   //Google mapの中央
-  var latlng = new google.maps.LatLng(35.66389,138.56833);
+  var latlng = new google.maps.LatLng(14.97111, 102.09972);
   var mapOptions = {
-    zoom: 8,
+    zoom: 6,
     center: latlng,
     scrollwheel: false,
   }
@@ -141,4 +141,101 @@ $(function(){
     document.getElementById("region").name = selected_region.data("name");
     document.getElementById("region").value = selected_region.data("value");
   });
+});
+
+//ページネーション
+$(function(){
+  var active = $(".pagination .active").text();
+  active = parseInt(active);
+  var page_length = $(".pagination li").length;
+  //最初から+3までのページネーション機能
+  if(active < 4){
+    var first_number = 0;
+    var second_number = 0;
+    var third_number = 4;
+    if(active == 1){
+      first_number = 2;
+      second_number = 3;
+    }else if(active == 2){
+      first_number = 1;
+      second_number = 3;
+    }else if(active == 3){
+      first_number = 1;
+      second_number = 2;
+    }
+    var max_num = 0;
+    max_num = parseInt($(".pagination li").eq(page_length-2).text());
+    var now_number = 0;
+    for(var i = 0; i < page_length; i++){
+      now_number = $(".pagination li").eq(i).text();
+      now_number = parseInt(now_number)
+      if(!isNaN(now_number)){
+        if(now_number != active && now_number != first_number && now_number != second_number && now_number != third_number && now_number != max_num){
+          $(".pagination li").eq(i).addClass('not-page');
+        }else{
+          if(now_number == max_num){
+            //ページが読み込まれるたびにページネーションが作り直されるから、「before」を持ってるなら、とかは考えなくてもOK!
+            $(".pagination li").eq(i).addClass('before');
+          }
+        }
+      }
+    }
+    $(".before").before("<li><a class='page-mark'>...</a></li>");
+  //最後から-3までのページネーション機能
+  }else if(active > parseInt($(".pagination li").eq(page_length-5).text())){
+    var first_number = 0;
+    var second_number = 0;
+    var third_number = parseInt($(".pagination li").eq(page_length-5).text());
+    var small_num = 1;
+    if(active == parseInt($(".pagination li").eq(page_length-2).text())){
+      first_number = parseInt($(".pagination li").eq(page_length-3).text());
+      second_number = parseInt($(".pagination li").eq(page_length-4).text());
+    }else if(active == parseInt($(".pagination li").eq(page_length-3).text())){
+      first_number = parseInt($(".pagination li").eq(page_length-2).text());
+      second_number = parseInt($(".pagination li").eq(page_length-4).text());
+    }else if(active == parseInt($(".pagination li").eq(page_length-4).text())){
+      first_number = parseInt($(".pagination li").eq(page_length-2).text());
+      second_number = parseInt($(".pagination li").eq(page_length-3).text());
+    }
+    var now_number = 0;
+    for(var i = 0; i < page_length; i++){
+      now_number = $(".pagination li").eq(i).text();
+      now_number = parseInt(now_number)
+      if(!isNaN(now_number)){
+        if(now_number != active && now_number != first_number && now_number != second_number && now_number != third_number && now_number != small_num){
+          $(".pagination li").eq(i).addClass('not-page');
+        }else{
+          if(now_number == small_num){
+            $(".pagination li").eq(i).addClass('after');
+          }
+        }
+      }
+    }
+    $(".after").after("<li><a class='page-mark'>...</a></li>");
+  //それ以外のページネーション機能
+  }else{
+    var active_plus_one = active + 1;
+    var active_minus_one = active - 1;
+    var now_number = 0;
+    var max_num = 0;
+    var small_num = 1;
+    max_num = parseInt($(".pagination li").eq(page_length-2).text());
+    for(var i = 0; i < page_length; i++){
+      now_number = $(".pagination li").eq(i).text();
+      now_number = parseInt(now_number)
+      if(!isNaN(now_number)){
+        if(now_number != active && now_number != active_plus_one && now_number != active_minus_one && now_number != small_num && now_number != max_num){
+          $(".pagination li").eq(i).addClass('not-page');
+        }else{
+          if(now_number == active_plus_one){
+            $(".pagination li").eq(i).addClass('after');
+          }else if(now_number == active_minus_one){
+              $(".pagination li").eq(i).addClass('before');
+          }
+        }
+      }
+    }
+    $(".before").before("<li><a class='page-mark'>...</a></li>");
+    $(".after").after("<li><a class='page-mark'>...</a></li>");
+  }
 });

@@ -3,12 +3,6 @@
 @include('thai_intern.footer')
 
 <div class="col-xs-12 form-back">
-
-  {{--エラーメッセージの表示--}}
-  @foreach($errors->all() as $message)  <!--$errorsにあるエラーを$messageに代入。なんかAJAXリクエストってやつもあるから見てみて-->
-  <!--なんか$errorsを扱うときはifを使う必要はないっぽい。もし違ったらこのコメント消しといて。-->
-     <p class="bg-danger">{{ $message }}</p>
-  @endforeach
     <!--フォーム上の小見出し-->
     <div class="apply-form-description">
       <h2>Application Form</h2>

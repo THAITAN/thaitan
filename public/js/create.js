@@ -30,7 +30,7 @@ map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         position: results[0].geometry.location,
       });
       location.value = results[0].geometry.location;
-      alert(location.value);
+      alert("OK!!");
     }else{
       alert("Geocode was not successful for the following reason: " + status);
     }

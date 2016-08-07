@@ -107,21 +107,19 @@
                 <option value="1" name="1">Web Engineer</option>  <!--valueがfind_child_idとして使われているよ-->
                 <option value="2" name="2">Mobile Engineer</option>
                 <option value="3" name="3">Infra Engineer</option>
-                <option value="4" name="4">Other</option>
               </optgroup>
               <optgroup label="Designer">
-                <option value="5" name="5">UI/UX Designer</option>
-                <option value="6" name="6">Graphic Designer</option>
-                <option value="7" name="7">Other</option>
+                <option value="4" name="4">UI/UX Designer</option>
+                <option value="5" name="5">Graphic Designer</option>
               </optgroup>
-              <option value="8" name="8">Director</option>  <!--valueがfind_child_idとして使われているよ-->
-              <option value="9" name="9">Sells</option>
-              <option value="10" name="10">Marketing</option>
-              <option value="11" name="11">Writer</option>
-              <option value="12" name="12">Restaurant</option>
-              <option value="13" name="13">Tourist</option>
-              <option value="14" name="14">BookStore</option>
-              <option value="15" name="15">Other</option>
+              <option value="6" name="6">Director</option>  <!--valueがfind_child_idとして使われているよ-->
+              <option value="7" name="7">Sells</option>
+              <option value="8" name="8">Marketing</option>
+              <option value="9" name="9">Writer</option>
+              <option value="10" name="10">Restaurant</option>
+              <option value="11" name="11">Tourist</option>
+              <option value="12" name="12">BookStore</option>
+              <option value="13" name="13">Other</option>
             </select>
             @if($errors->has('find_id'))
               <p class="bg-danger">{{$errors->first("find_id")}}</p>
