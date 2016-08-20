@@ -20,7 +20,6 @@ $(function(){
 
 
 //アコーディオンメニュー
-
 $(function()
 {
 	// [.syncer-acdn]にクリックイベントを設定する
@@ -68,7 +67,6 @@ $(function()
 }) ;
 
 //タブメニュー
-
 $(function() {
     $(".tab-menu").click(function() {
         var num = $(".tab-menu").index(this);
@@ -80,7 +78,6 @@ $(function() {
 });
 
 ////画像の縦横の比率維持
-
 $(document).ready(function(){
     $('.img-container').imgLiquid();
 });
@@ -94,7 +91,6 @@ $(document).ready(function(){
 });
 
 //サイドバークリック時の処理（カテゴリ）
-
 $(function(){
   $(".sidebar-category").click(function(){
     if($(".sidebar-category").hasClass('selected-cat')){

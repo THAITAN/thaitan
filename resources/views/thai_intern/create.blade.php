@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="sub-image-1" class="">Sub Image (about 320 × 180)</label>
+        <label for="sub-image-1" class="">Sub Image (about 315 × 195)</label>
         <div class="">
           {!! Form::file('sub-image-1', array('class' => '')) !!}
           @if($errors->has('sub-image-1'))
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="sub-image-2" class="">Sub Image (about 320 × 180)</label>
+        <label for="sub-image-2" class="">Sub Image (about 315 × 195)</label>
         <div class="">
           {!! Form::file('sub-image-2', array('class' => '')) !!}
           @if($errors->has('sub-image-2'))
@@ -270,5 +270,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2N7tKVFoOyk819CkapELogq2HIwCAjYE"></script>
 {!! Html::script('js/create.js') !!}
+{!! Html::script('js/default.js') !!}
 
 @stop

@@ -23,6 +23,7 @@ Route::get('thai_intern/apply_form/{id}', 'PostsController@applyForm');
 Route::get('thai_intern/contact_form', 'PostsController@showContactForm');
 Route::get('thai_intern/about', 'PostsController@showAbout');
 Route::get('thai_intern/sample', 'PostsController@showSample');
+Route::get('thai_intern/privacy_policy', 'PostsController@showPrivacyPolicy');
 Route::resource('thai_intern', 'PostsController');
 //Route::get('thai_intern/category/{id}', 'PostsController@showCategory');
 //Route::get('thai_intern/child_category/{id}', 'PostsController@showChildCategory');

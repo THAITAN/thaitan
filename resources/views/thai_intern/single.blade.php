@@ -24,7 +24,7 @@
 <div id="top-map"></div>
 
 <div class="container clearfix">
-  <div class="col-lg-4 col-md-4">
+  <div id = "desktop-menu" class="col-lg-4 col-md-4">
     @yield('sidebar')
   </div>
   <div class="col-lg-8 col-md-8">
@@ -103,6 +103,26 @@
               </tr>
             </table>
           </div>
+          <!--レスポンシブの募集要項（600px以上はnone）-->
+          <div class="responsive-table-content">
+            <h4>募集要項</h4>
+            <h6>職種</h6>
+            @if($post->categories->id == 1 || $post->categories->id == 2)
+              <p>{{$post->categories->childcategories->name}}</p>
+            @else
+              <p>{{$post->categories->name}}</p>
+            @endif
+            <h6>給与</h6>
+            <p><?php change_to_br($post->salary); ?></p>
+            <h6>募集資格・必須スキル</h6>
+            <p><?php change_to_br($post->skill); ?></p>
+            <h6>勤務地</h6>
+            <p><?php change_to_br($post->companies->location); ?></p>
+            <h6>期間</h6>
+            <p><?php change_to_br($post->term); ?></p>
+            <h6>人数</h6>
+            <p><?php change_to_br($post->number); ?></p>
+          </div>
         </div>
 
       </div>
@@ -118,6 +138,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2N7tKVFoOyk819CkapELogq2HIwCAjYE"></script>
 {!! Html::script('js/single.js') !!}
+{!! Html::script('js/default.js') !!}
 {!! Html::script('js/imgLiquid-min.js') !!}
 
 @stop

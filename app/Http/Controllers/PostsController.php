@@ -30,11 +30,17 @@ class PostsController extends Controller
 
     public function show($id)
     {
+      $all_posts = Post::all();
       $categories = Category::all();
       $child_categories = ChildCategory::all();
       $regions = Region::all();
       $post = $this->posts->find($id);
-      return view('thai_intern.single')->with('post', $post)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions);
+      if(count($post) == 0){
+        $error_message = "Sorry, Not Found";
+        return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+      }else{
+        return view('thai_intern.single')->with('post', $post)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions);
+      }
     }
 
     public function create()
@@ -116,7 +122,17 @@ class PostsController extends Controller
     public function applyForm($id)
     {
       $post = $this->posts->find($id);
-      return view("thai_intern.apply_form")->with("post", $post);
+      $all_posts = Post::all();
+      $categories = Category::all();
+      $child_categories = ChildCategory::all();
+      $regions = Region::all();
+      $post = $this->posts->find($id);
+      if(count($post) == 0){
+        $error_message = "Sorry, Not Found";
+        return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+      }else{
+        return view("thai_intern.apply_form")->with("post", $post);
+      }
     }
 
     public function showAbout()
@@ -131,6 +147,10 @@ class PostsController extends Controller
 
     public function showContactForm(){
       return view("thai_intern.contact");
+    }
+
+    public function showPrivacyPolicy(){
+      return view("thai_intern.privacy_policy");
     }
 
     /*
@@ -177,7 +197,11 @@ class PostsController extends Controller
       $query = $request->get('q');
       if($query){
         //検索ワードで絞った記事一覧
-        $posts = $this->posts->where('title', 'LIKE', "%{$query}%")->orderBy("created_at", "desc")->paginate(3);
+        $posts = $this->posts->where('title', 'LIKE', "%{$query}%")->orderBy("created_at", "desc")->paginate(10);
+        if(count($posts) == 0){
+          $error_message = "Sorry, Not Found";
+          return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+        }
         //カテゴリと地域で絞った記事一覧
       }elseif($request->has("category") && $request->has("region")){
         switch($request->get("category")){
@@ -215,7 +239,7 @@ class PostsController extends Controller
           case "ハジャイ":
             $region_id = 5;
             break;
-          case "テーサバーンナコーン・ウドーンターニー":
+          case "ウドーンターニー":
             $region_id = 6;
             break;
           case "パーククレット":
@@ -324,9 +348,17 @@ class PostsController extends Controller
               $category_id = 10;
               break;
           }
-          $posts = $this->posts->where("cat_id", $category_id)->where("region_id", $region_id)->paginate(3);
+          $posts = $this->posts->where("cat_id", $category_id)->where("region_id", $region_id)->paginate(10);
+          if(count($posts) == 0){
+            $error_message = "Sorry, Not Found";
+            return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+          }
         }else{
-          $posts = $this->posts->where("child_cat_id", $category_id)->where("region_id", $region_id)->paginate(3);
+          $posts = $this->posts->where("child_cat_id", $category_id)->where("region_id", $region_id)->paginate(10);
+          if(count($posts) == 0){
+            $error_message = "Sorry, Not Found";
+            return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+          }
         }
       }elseif($request->has("category")){
         switch($request->get("category")){
@@ -375,9 +407,17 @@ class PostsController extends Controller
               $category_id = 10;
               break;
           }
-          $posts = $this->posts->where("cat_id", $category_id)->paginate(3);
+          $posts = $this->posts->where("cat_id", $category_id)->paginate(10);
+          if(count($posts) == 0){
+            $error_message = "Sorry, Not Found";
+            return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+          }
         }else{
-          $posts = $this->posts->where("child_cat_id", $category_id)->paginate(3);
+          $posts = $this->posts->where("child_cat_id", $category_id)->paginate(10);
+          if(count($posts) == 0){
+            $error_message = "Sorry, Not Found";
+            return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+          }
         }
       }elseif($request->has("region")){
         switch($request->get("region")){
@@ -396,7 +436,7 @@ class PostsController extends Controller
           case "ハジャイ":
             $region_id = 5;
             break;
-          case "テーサバーンナコーン・ウドーンターニー":
+          case "ウドーンターニー":
             $region_id = 6;
             break;
           case "パーククレット":
@@ -478,7 +518,11 @@ class PostsController extends Controller
             $region_id = 32;
             break;
         }
-        $posts = $this->posts->where("region_id", $region_id)->paginate(3);
+        $posts = $this->posts->where("region_id", $region_id)->paginate(10);
+        if(count($posts) == 0){
+          $error_message = "Sorry, Not Found";
+          return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+        }
         /*if($request->get("category") < 10){
           //子カテゴリと地域
           $posts = $this->posts->where("child_cat_id", $request->get("category"))->where("region_id", $request->get("region"))->paginate(3);
@@ -502,7 +546,11 @@ class PostsController extends Controller
           $posts = $this->posts->where("region_id", $request->get("region"))->paginate(3);*/
       }else{
         //デフォルトの記事一覧
-		    $posts = $this->posts->orderBy("created_at", "desc")->paginate(3);
+		    $posts = $this->posts->orderBy("created_at", "desc")->paginate(10);
+        if(count($posts) == 0){
+          $error_message = "Sorry, Not Found";
+          return view('errors.404')->with('error_message', $error_message)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);
+        }
 	    }
 
       return view('thai_intern.post')->with('posts', $posts)->with("categories", $categories)->with("child_categories", $child_categories)->with("regions", $regions)->with("all_posts", $all_posts);

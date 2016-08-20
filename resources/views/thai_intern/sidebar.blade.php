@@ -5,16 +5,16 @@
 
     <!--開発中-->
     <ul class="list-group">
-      <li class="list-group-item sidebar-part">
+      <li class="list-group-item sidebar-part sidebar-search">
         {!! Form::open(array('url' => 'thai_intern/post', 'method' => 'GET')) !!}
           {{ Form::text('q', null, ['placeholder' => 'search']) }}
         {{ Form::close() }}
       </li>
       <div class="clearfix filter-part">
-        <p class="pull-left filter">フィルター</p>
-        <p class="pull-right reset-link"><a href="http://localhost:8000/thai_intern/post">絞り込みを解除する</a></p>
+        <p class="filter">フィルター</p>
+        <p class="reset-link"><a href="http://localhost:8000/thai_intern/post">絞り込みを解除する</a></p>
       </div>
-      <li class="list-group-item sidebar-part clearfix"><a class="thai-acdn-1" data-target="thai-acdn-01">Job Categoru<span class="arrow arrow-button-1 pull-right"></span></a></li>
+      <li class="list-group-item sidebar-part clearfix"><a id="category_name" class="thai-acdn-1" data-target="thai-acdn-01">Job Categoru<span class="arrow arrow-button-1 pull-right"></span></a></li>
         <ul id="thai-acdn-01" class="thai-child-acdn sidebar-child-part">
           @foreach($categories as $category)
             @if($category->id == 1 || $category->id == 2)
@@ -52,7 +52,7 @@
       {!! Form::open(array('url' => 'thai_intern/post', 'method' => 'GET')) !!}
         <input id="category" type="hidden" name="" value="">
         <input id="region" type="hidden" name="" value="">
-        <button type="submit" class="btn btn-grey700_rsd sidebar-button" style="width: 100%;">絞り込む</button>
+        <button id="filter-button" type="submit" class="btn btn-grey700_rsd sidebar-button" style="width: 100%;">絞り込む</button>
       {{ Form::close() }}
     </ul>
   </div>
